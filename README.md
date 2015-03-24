@@ -3,6 +3,7 @@
 * SH1TTY
 * Jurassic Sparc
 * smtpwn
+* mastermind
 * TODO
 
 # Forensics
@@ -21,9 +22,14 @@
 
 * TODO
 
-# Shellcoding
+# Reversing
 
 * TODO
+
+# Shellcoding
+
+* tldr
+* bluepill
 
 # Web
 
