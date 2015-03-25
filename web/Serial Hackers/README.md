@@ -14,7 +14,7 @@ CREATE TABLE hackers (
   beer int NOT NULL DEFAULT 0,
   PRIMARY KEY (handle)
 );
- 
+
 CREATE TABLE secret(
   flag varchar(64) NOT NULL
 );
@@ -34,6 +34,7 @@ INSERT INTO hackers (handle, age, quote, photo, web, reverse, guessing, beer) VA
 INSERT INTO hackers (handle, age, quote, photo, web, reverse, guessing, beer) VALUES('The Mac Guy', 36, 'Tip of the day: Encrypt your laptop, keep your data safe','images/mac.png',30,20,40,10);
 INSERT INTO hackers (handle, age, quote, photo, web, reverse, guessing, beer) VALUES('Stan',51,'Nothing is impossible.','images/stan.png',30,70,100,60);
 INSERT INTO hackers (handle, age, quote, photo, web, reverse, guessing, beer) VALUES('Warlock', 34, ' Why did you bring a cop to my command center?','images/warlock.png',20,20,30,80);
+
 
 
 ####
