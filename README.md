@@ -12,7 +12,7 @@
 
 # Hardware
 
-* TODO
+* 1-2-3-4
 
 # Mobile
 
@@ -34,3 +34,4 @@
 # Web
 
 * Hack like it's 1999!
+* Serial Hackers
