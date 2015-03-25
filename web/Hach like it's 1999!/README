@@ -1,0 +1,54 @@
+MySQL DB
+    CREATE DATABASE FREEVIDZZZ;
+    USE FREEVIDZZZ;
+
+    CREATE TABLE users (user VARCHAR(20), password CHAR(32));
+    CREATE TABLE movies (name VARCHAR(20), data VARCHAR(100));
+
+    GRANT SELECT ON FREEVIDZZZ.users TO 'user'@'localhost' IDENTIFIED BY 'password';
+    GRANT SELECT ON FREEVIDZZZ.movies TO 'user'@'localhost' IDENTIFIED BY 'password';
+
+    INSERT INTO users VALUES('jim', 'cd503fa9dd6e39d7e1a7c380dc63f941');
+    INSERT INTO users VALUES('john', 'fa48187dc840777d90f07f68f3581bbf');
+    INSERT INTO users VALUES('paula', '6bee1e9ab016f6333fcca7a8a976f505');
+
+    INSERT INTO movies VALUES('MATRIX', "INS{pErL h@cKerZ FTW}");
+    INSERT INTO movies VALUES('HACKERS', "Almost there...");
+    INSERT INTO movies VALUES('SWORDFISH', "Seriously??? You spent that much time to download SWORDFISH???");
+    INSERT INTO movies VALUES('WARGAMES', "Hey hey! Getting closer...");
+
+How to solve
+    Homepage index.html
+        -> CGI/INFO.PL?NAME=<FILE>
+            -> display info about a video
+            -> can be used to read source files
+                -> GET CGI/INFO.PL?NAME=CGI/DOWNLOAD.PL
+                    -> we get the source code of CGI/DOWNLOAD.PL
+
+    DOWNLOAD.PL
+        -> used to download videos
+        -> checks user/password
+        -> exploit
+            -> can recover a username and its corresponding password hash (the
+               hash is not really necessary) 
+
+        Vuln in DOWNLOAD.PL line 15:
+            $hash = $ctx->reval("md5_hex($password)");
+
+            Almost nothing available in reval, but $_ is kept intact and
+            contains an array with the username and hash for the current
+            iteration, set at line 41.
+
+        To exploit, we can use a timing attack. Compare successive characters in
+        username and hash to test characters and make the server have a delay
+        when the characters match.
+
+        To make sure we are always targeting the same username/password pair, we
+        add a test so that the delay only occurs when the characters already
+        found are also matched.
+
+        Once we recovered the username and the hash, we make a GET with the
+        recovered username and hash (and url-encode the query parameters if
+        necessary):
+            GET CGI/DOWNLOAD.PL?NAME=MATRIX&USER=jim&PASSWORD=),("cd503fa9dd6e39d7e1a7c380dc63f941"
+
