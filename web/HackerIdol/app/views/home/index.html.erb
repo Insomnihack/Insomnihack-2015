@@ -1,0 +1,43 @@
+<div class="jumbotron">
+	<div class="container">
+	<h2 style="color:red"><%= session.delete(:error) %></h2>
+	<% if session[:participant_id].blank? %>
+        <h1>Welcome to Hacking Movie Idol !</h1>
+        <p>You can't stand every movies with poorly designed effects and bullshit about hacking technology ? You deeply believe that hackers are new heroes ! HMI brings to you the possibility to realise your dream ! We give you a 100 000 $ budget to hire the best actors and scenarists in the world to product the BEST HACKING MOVIE ever !</p>
+        <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register NOW &raquo;</a></p>
+	<% else %>
+	<h1><%= session[:participant_name] %> - <%= @budget %> $</h1>
+        <p><% @stars.each do |star| %>
+        <i><%= star["data"]["skill"] %></i> - <%= star["data"]["name"] %> ; 
+        <% end %>
+        </p>
+        <p><a class="btn btn-primary btn-lg" href="/submit" role="button">Submit to HMI &raquo;</a></p>
+    <% end %>
+	</div>
+</div>
+<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Actor</h2>
+          <p>An actor (actress for a female) is a person portraying a character in a dramatic or comic production; he or she performs in film, television, theatre, or radio. We offer a list of famous actor to help you winning HMI !</p>
+          <p><a class="btn btn-default" href="/search?utf8=✓&search%5Bskill%5D=Actor" role="button">Search &raquo;</a></p>
+        </div>
+        <div class="col-md-3">
+          <h2>Scenarist</h2>
+          <p>A Scenarist is a writer who practices the craft of screenwriting, writing screenplays on which mass media such as films, television programs, comics or video games are based. Screenwriting is a freelance profession. No education is required to become a professional screenwriter, just good storytelling abilities and imagination.</p>
+          <p><a class="btn btn-default" href="/search?utf8=%E2%9C%93&search%5Bskill%5D=Scenarist" role="button">Search &raquo;</a></p>
+       </div>
+        <div class="col-md-3">
+          <h2>Stage Director</h2>
+          <p>A stage director is a director in the theatre field who oversees and orchestrates the mounting of a theatre production (a play, an opera, a musical, or a devised piece of work) by unifying various endeavours and aspects of production.</p>
+          <p><a class="btn btn-default" href="/search?utf8=%E2%9C%93&search%5Bskill%5D=Director" role="button">Search &raquo;</a></p>
+        </div>
+        <div class="col-md-3">
+          <h2>Cameraman</h2>
+          <p>A cameraman is a professional operator of a film or video camera. In filmmaking, the leading camera operator is usually called a cinematographer, while a camera operator in a video production may be known as a television camera operator, video camera operator, or videographer, depending on the context and technology involved, usually operating a professional video camera.</p>
+          <p><a class="btn btn-default" href="/search?utf8=%E2%9C%93&search%5Bskill%5D=Cameraman" role="button">Search &raquo;</a></p>
+        </div>
+      </div>
+       <hr>
+    </div>

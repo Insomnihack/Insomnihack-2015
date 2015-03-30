@@ -1,0 +1,2 @@
+module HireHelper
+end

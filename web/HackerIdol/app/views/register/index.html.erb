@@ -1,0 +1,11 @@
+<div class="container">
+<%= form_for :participant, :html => {class: 'form-signin' } do |f| %>
+<form class="form-signin" method="POST">
+        <h2 class="form-signin-heading">Register</h2>
+        <label for="inputEmail" class="sr-only">Name</label>
+        <%= f.text_field :name, :class => 'form-control', :placeholder => 'Name', :required => 'true', :autofocus => 'true' %>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <%= f.password_field :password, :class => 'form-control', :placeholder => 'Password', :required => 'true' %>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <% end %>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+      <h2 style="color:red"><%= session.delete(:error) %></h2>
+      <div class="row">
+      <% @paths.each do |path| %>
+        <div class="col-md-4">
+          <h2><i><%= path["end"]["data"]["skill"] %></i> - <%= path["end"]["data"]["name"] %></h2>
+          <img width="300" src="<%= path["end"]["data"]["photo"] %>">
+          <p><%= path["end"]["data"]["description"] %></p>
+          <p>Notoriety : <%= path["end"]["data"]["notoriety"] %> !</p>
+          <p>Cost : <%= path["end"]["data"]["cost"] %> $</p>
+          <% total = path["end"]["data"]["cost"] %>
+          <% p = '' %>
+          <% if path["length"]-1 == 1 %>
+          	<p><%= path["length"]-1 %> intermediate agency</p>
+          <% else %>
+          	<p><%= path["length"]-1 %> intermediate agencies</p>
+          <% end %>
+          <ul>
+          	<% (1..path["length"]-1).each do |n| %>
+          	<% total *= (1+path["nodes"][n]["data"]["marge"]) %>
+          	<% p += path["nodes"][n]["metadata"]["id"].to_s+'-' %>
+          	<li><%= path["nodes"][n]["data"]["name"] %> + <%= path["nodes"][n]["data"]["marge"]*100 %> %</li>
+          	<% end %>
+          </ul>
+          <p><b>Total : <%= total.round(2)%> $</b></p>
+          <p><a class="btn btn-default" href="/hire/<%= p+path["end"]["metadata"]["id"].to_s %>" role="button">Hire &raquo;</a></p>
+        </div>
+      <% end %>
+      </div>
+<hr>
+</div>
